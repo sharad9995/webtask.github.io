@@ -37,20 +37,20 @@ scanButton.addEventListener("click", async () => {
       document.write(`> Records: (${message.records.length})`);
       
       for (const record of message.records) {
-          log(`\nRecord id: ${record.id}`);
-          log(`Record type: ${record.recordType}`);
-          log(`MIME type: ${record.mediaType}`);          
+          document.write(`\nRecord id: ${record.id}`);
+          document.write(`Record type: ${record.recordType}`);
+          document.write(`MIME type: ${record.mediaType}`);          
           switch (record.recordType) {
             case "text":
               {
                 const textDecoder = new TextDecoder(record.encoding);
-                log(`Text: ${textDecoder.decode(record.data)} (${record.lang})`);
+                document.write(`Text: ${textDecoder.decode(record.data)} (${record.lang})`);
               }
               break;
             case "url":
               {
                 const textDecoder = new TextDecoder();
-                log(`URL: ${textDecoder.decode(record.data)}`);
+                document.write(`URL: ${textDecoder.decode(record.data)}`);
               }
               break;
             default:
