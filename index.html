@@ -37,6 +37,31 @@ scanButton.addEventListener("click", async () => {
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
       document.write(`> Serial Number: ${serialNumber}`);
       document.write(`> Records: (${message.records.length})`);
+      
+      for (const record of message.records) {
+          log(`\nRecord id: ${record.id}`);
+          log(`Record type: ${record.recordType}`);
+          log(`MIME type: ${record.mediaType}`);          
+          switch (record.recordType) {
+            case "text":
+              {
+                const textDecoder = new TextDecoder(record.encoding);
+                log(`Text: ${textDecoder.decode(record.data)} (${record.lang})`);
+              }
+              break;
+            case "url":
+              {
+                const textDecoder = new TextDecoder();
+                log(`URL: ${textDecoder.decode(record.data)}`);
+              }
+              break;
+            default:
+              // TODO: Handle other records with record data.
+            }
+          }  
+      
+      
+      
     });
   } catch (error) {
     document.write("Argh! " + error);
